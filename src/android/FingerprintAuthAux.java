@@ -236,6 +236,7 @@ public class FingerprintAuthAux {
             final String key = args.getString(0);
             final String password = args.getString(1);
             setUserAuthenticationRequired = args.get(2).equals(null) || args.getBoolean(2);
+            final String message = args.getString(3);
 
             if (isFingerprintAuthAvailable()) {
                 SecretKey secretKey = getSecretKey();
@@ -249,7 +250,7 @@ public class FingerprintAuthAux {
                 mToEncrypt = password;
 
                 if (setUserAuthenticationRequired) {
-                    showFingerprintDialog(Cipher.ENCRYPT_MODE, null, cordova);
+                    showFingerprintDialog(Cipher.ENCRYPT_MODE, message, cordova);
                 } else {
                     SharedPreferences sharedPref = cordova.getActivity().getApplicationContext().getSharedPreferences(SHARED_PREFS_NAME,Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPref.edit();
